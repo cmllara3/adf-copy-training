@@ -1,0 +1,16 @@
+{
+	"name": "sqlmockdatatable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sqldatabaselabbook",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Mock_Data"
+		}
+	}
+}
