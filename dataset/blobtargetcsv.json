@@ -1,0 +1,21 @@
+{
+	"name": "blobtargetcsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "salabbook",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "blobtarget"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
