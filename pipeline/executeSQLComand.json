@@ -1,0 +1,37 @@
+{
+	"name": "executeSQLComand",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SQL Comand",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "sp_executesql",
+					"storedProcedureParameters": {
+						"statement": {
+							"value": {
+								"value": "CREATE TABLE dbo.Mock_Data (\n    id int,\n    first_name nvarchar(255),\n    last_name nvarchar(255),\n    email nvarchar(255),\n    gender nvarchar(255),\n    ip_address nvarchar(255)\n)",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "sqldatabaselabbook",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
