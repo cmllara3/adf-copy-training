@@ -1,5 +1,5 @@
 {
-	"name": "sqlcustomer",
+	"name": "sqldatabase",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "sqldatabaselabbook",

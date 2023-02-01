@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "MOCK_DATA.csv",
 				"container": "blobsource"
 			},
 			"columnDelimiter": ",",

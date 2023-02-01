@@ -44,7 +44,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "sqlcustomer",
+						"referenceName": "sqldatabase",
 						"type": "DatasetReference"
 					}
 				],
