@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat(formatDateTime(utcnow(), 'yyyy/MM/dd hh:mm:ss'),'.csv')",
+					"value": "@concat(formatDateTime(utcnow(), 'yyyy/MM/dd/ hh:mm'),'.csv')",
 					"type": "Expression"
 				},
 				"container": "sqldynamictarget"
