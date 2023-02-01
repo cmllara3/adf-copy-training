@@ -20,7 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"enablePartitionDiscovery": false
+							"enablePartitionDiscovery": false,
+							"prefix": "MOCK_DATA.csv"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
