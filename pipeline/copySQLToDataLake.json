@@ -44,12 +44,21 @@
 						"referenceName": "datalaketarget",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "[SalesLT].[Customer]"
+							"FileName": {
+								"value": "@pipeline().parameters.FileName",
+								"type": "Expression"
+							}
 						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"FileName": {
+				"type": "string",
+				"defaultValue": "[SalesLT].[Customer]"
+			}
+		},
 		"annotations": []
 	}
 }
