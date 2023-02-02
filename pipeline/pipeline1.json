@@ -1,0 +1,182 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "If Incremental",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@pipeline().parameters.IncrementalRefresh",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set startDate Full",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "startDate",
+								"value": "'19000101'"
+							}
+						},
+						{
+							"name": "Set endDate Full",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set startDate Full",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "endDate",
+								"value": "'29991231'"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set startDate Incremental",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "startDate",
+								"value": {
+									"value": "@concat(pipeline().parameters.SingleQuote,formatDateTime(addDays(utcnow(), -1), 'yyyyMMdd'),pipeline().parameters.SingleQuote)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set endDate Incremental",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set startDate Incremental",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "endDate",
+								"value": {
+									"value": "@concat(pipeline().parameters.SingleQuote,formatDateTime(addDays(utcnow(), -1), 'yyyyMMdd'),pipeline().parameters.SingleQuote)",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Copy Data Incremental",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "If Incremental",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('SELECT * FROM SalesLT.Customer WHERE CAST(ModifiedDate AS DATE) >', variables('startDate'), 'AND CAST(ModifiedDate AS DATE) <=', variables('endDate'))",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "sqldatabase",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlincrementaltarget",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileNamePatterm": {
+								"value": "@pipeline().parameters.FileNamePatterm",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"IncrementalRefresh": {
+				"type": "bool",
+				"defaultValue": true
+			},
+			"SingleQuote": {
+				"type": "string",
+				"defaultValue": "'"
+			},
+			"FileNamePatterm": {
+				"type": "string",
+				"defaultValue": "[SalesLT].[Customer]"
+			}
+		},
+		"variables": {
+			"startDate": {
+				"type": "String"
+			},
+			"endDate": {
+				"type": "String"
+			},
+			"FileNamePaterm": {
+				"type": "String",
+				"defaultValue": "[SalesLT].[Customer]"
+			},
+			"FullFileName": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
