@@ -61,11 +61,8 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "sqlincrementaltarget",
-									"type": "DatasetReference",
-									"parameters": {
-										"FileNamePatterm": " "
-									}
+									"referenceName": "sqlincrementaltargetdelete",
+									"type": "DatasetReference"
 								},
 								"enableLogging": false,
 								"storeSettings": {

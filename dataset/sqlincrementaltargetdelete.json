@@ -5,11 +5,6 @@
 			"referenceName": "salabbook",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"FileNamePatterm": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
