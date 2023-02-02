@@ -28,7 +28,7 @@
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings",
-							"filePattern": "setOfObjects"
+							"filePattern": "arrayOfObjects"
 						}
 					},
 					"enableStaging": false
@@ -42,7 +42,10 @@
 				"outputs": [
 					{
 						"referenceName": "datalaketarget",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": "[SalesLT].[Customer]"
+						}
 					}
 				]
 			}
