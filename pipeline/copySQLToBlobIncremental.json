@@ -39,6 +39,45 @@
 								"variableName": "endDate",
 								"value": "'29991231'"
 							}
+						},
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Set endDate Full",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "sqlincrementaltarget",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNamePatterm": " "
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false,
+									"prefix": {
+										"value": "@{pipeline().parameters.FileNamePatterm}",
+										"type": "Expression"
+									}
+								}
+							}
 						}
 					],
 					"ifTrueActivities": [
