@@ -41,7 +41,7 @@
 							}
 						},
 						{
-							"name": "Delete1",
+							"name": "Delete Full",
 							"type": "Delete",
 							"dependsOn": [
 								{
