@@ -1,0 +1,32 @@
+{
+	"name": "sqlincrementaltarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "salabbook",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileNamePatterm": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().FileNamePatterm, ' ', formatDateTime(utcNow(), 'yyyy-MM-dd hh:mm'),'.csv')",
+					"type": "Expression"
+				},
+				"container": "sqlincrementaltarget"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

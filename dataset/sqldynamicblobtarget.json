@@ -1,0 +1,26 @@
+{
+	"name": "sqldynamicblobtarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "salabbook",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(formatDateTime(utcnow(), 'yyyy/MM/dd/ hh:mm'),'.csv')",
+					"type": "Expression"
+				},
+				"container": "sqldynamictarget"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
