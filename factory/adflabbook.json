@@ -1,0 +1,9 @@
+{
+	"name": "adflabbook",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f1a99ef9-3bb9-44b8-b681-d8bae76f1f71",
+		"tenantId": "fabd047c-ff48-492a-8bbb-8f98b9fb9cca"
+	}
+}

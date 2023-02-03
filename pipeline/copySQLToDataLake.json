@@ -59,6 +59,8 @@
 				"defaultValue": "[SalesLT].[Customer]"
 			}
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2023-02-03T09:02:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
